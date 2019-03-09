@@ -102,9 +102,7 @@ F24::return ;this line is mandatory for proper functionality
 ;;------------------------NEXT ROW--------------------------;;
 
 ; tab::
-q::
-reload
-return
+q::reload
 ; w::
 ; e::
 ; r::
@@ -112,9 +110,9 @@ return
 ; y::
 ; u::
 ; i::
-o::run,C:\Program Files\Microsoft Office\root\Office16\OUTLOOK.EXE
-Lctrl & s::
-Rctrl & s::tooltip,itwerks
+o::run, C:Program Files (x86)\Microsoft Office\root\Office16\OUTLOOK.EXE
+#o::run, C:Program Files (x86)\Microsoft Office\root\Office16\OUTLOOK.EXE /c ipm.note
+
 p::send,{Media_Play_Pause}
 [::send,{Media_Prev}
 ]::send,{Media_Next}
@@ -137,24 +135,35 @@ K::Run, calc
 ; '::
 ; enter::tooltip, [F24]  %A_thisHotKey%
 
-;;------------------------NEXT ROW--------------------------;;
+;;-----------Q-------------NEXT ROW--------------------------;;
 
 ; z::
 ; x::
-c::Run,C:\Program Files (x86)\Google\Chrome\Application\Chrome.exe
+c::run,C:Program Files (x86)\Microsoft Office\root\Office16\OUTLOOK.EXE /select outlook:calendar
+#c::
+run, C:Program Files (x86)\Microsoft Office\root\Office16\OUTLOOK.EXE /select outlook:calendar, , , PID
+WinWait, Calendar, , 6
+if ErrorLevel
+{
+    MsgBox, WinWait timed out.
+    return
+}
+sleep, 500 
+send, ^+q
+return
 ; v::
-; b::
+b::Run,C:\Program Files (x86)\Google\Chrome\Application\Chrome.exe
 ; n::
-; m::
+m::run,C:\Users\mszulc\AppData\Local\TIDAL\tidal.exe
 ; ,::
 ; .::
 ; /::tooltip, [F24]  %A_thishotKey%
 
-space::
-tooltip, [F24] SPACEBAR. This will now clear remaining tooltips.
-sleep 500
-tooltip,
-return
+; space::
+; tooltip, [F24] SPACEBAR. This will now clear remaining tooltips.
+; sleep 500
+; tooltip,
+; return
 
 
 
@@ -162,12 +171,12 @@ return
 
 ;Lshift::tooltip, Even if you used the "F22_with_modifiers" hex file, these woudn't be wrapped unless you were already holding down some OTHER key. hmm.
 ;If you DID use F24.hex, then these won't get pressed in the first place.
-;Lctrl::tooltip, do not use
-;Lwin::tooltip, do not use
-;Lalt::tooltip, do not use
+; Lctrl::tooltip, do not use
+; Lwin::tooltip, do not use
+; Lalt::tooltip, do not use
 
-;Ralt::tooltip, do not use
-;Rwin::tooltip, do not use
+; Ralt::tooltip, do not use
+; Rwin::tooltip, do not use
 ;appskey::tooltip, This is not a modifier, but I replaced it with INTERNATIONAL4 (SC079) anyway, because it was able to misbehave.
 ;Rctrl::tooltip, do not use
 ;Rshift::tooltip, do not use
@@ -196,7 +205,7 @@ return
 ; SC071 up::tooltip, [F24] LCtrl -to-> SC071-Language 2
 ; SC072 up::tooltip, [F24] LWin -to-> SC072-Language 1
 ; SC073 up::tooltip, [F24] LAlt -to-> SC073-International 1
-; The above 3 assignments MUST up the UP stroke
+;  The above 3 assignments MUST up the UP stroke
 
 ; SC077::tooltip, [F24] RAlt -to-> SC077-Language 4
 ; SC078::tooltip, [F24] RWin -to-> SC078-Language 3
@@ -226,7 +235,7 @@ SC05C::Send, {NumLock}
 ; ;;Don't use the 3 keys above for your 2nd keyboard! Just don't!!
 
 ; insert::
-; delete::tooltip, [F24] %A_thishotkey%
+; delete::tooltip, [F24] %A_thishotKey%
 
 ; home::
 ; end::tooltip, [F24] %A_thishotKey%
@@ -304,6 +313,7 @@ SC05C::Send, {NumLock}
 
 #if ;this line will end the F24 secondary keyboard assignments.
 
+
 ;;;---------------IMPORTANT: HOW TO USE #IF THINGIES-------------------
 
 ;;You can use more than one #if thingy at a time, but it must be done like so:
@@ -338,6 +348,7 @@ F1::msgbox, You pressed F1 on your secondary keyboard while inside of Premiere P
 ;;At the very least, you'll have some duplicate keys.
 
 #if
+
 ;;*******************************************************************************
 ;;*************DEFINE YOUR NORMAL KEY ASSIGNMENTS BELOW THIS LINE****************
 ;;*******************************************************************************
