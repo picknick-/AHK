@@ -106,7 +106,7 @@ q::reload
 ; w::
 ; e::
 ; r::
-; t::
+t::run, C:\shortcuts\Windows Terminal
 ; y::
 ; u::
 ; i::
@@ -122,7 +122,7 @@ p::send,{Media_Play_Pause}
 ;;------------------------NEXT ROW--------------------------;;
 
 a::Run, %A_WorkingDir%
-; s::
+s::Run C:\shortcuts\Spotify
 d::Run, C:\Users\%A_UserName%\Downloads
 f::Run,C:\Program Files (x86)\Mozilla Firefox\Firefox.exe
 g::Run, C:\Guidewire\type_generic_data_export_import_accelerator
@@ -154,7 +154,7 @@ return
 ; v::
 b::Run,C:\Program Files (x86)\Google\Chrome\Application\Chrome.exe
 ; n::
-m::run,C:\Users\mszulc\AppData\Local\TIDAL\tidal.exe
+m::Send {LControl down}d{LControl up}
 ; ,::
 ; .::
 ; /::tooltip, [F24]  %A_thishotKey%
