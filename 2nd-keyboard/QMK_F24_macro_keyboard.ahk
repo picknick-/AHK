@@ -1,4 +1,4 @@
-SetWorkingDir, C:\AHK\2nd-keyboard\
+﻿SetWorkingDir, C:\AHK\2nd-keyboard\
 ;Menu, Tray, Icon, shell32.dll, 283 ;if commented in, this line will turn the H icon into a little grey keyboard-looking thing.
 ;SetKeyDelay, 0 ;IDK exactly what this does.
 
@@ -23,7 +23,7 @@ SetWorkingDir, C:\AHK\2nd-keyboard\
 
 
 #NoEnv
-SendMode Input
+sendMode Input
 #InstallKeybdHook
 ;#InstallMouseHook ;<--You'll want to use this if you have scripts that use the mouse.
 #UseHook On
@@ -67,16 +67,21 @@ SendMode Input
 F24::return ;this line is mandatory for proper functionality
 
 ; ;escape::tooltip, "[F24] You might wish to not give a command to escape. Could cause problems. IDK."
-; F1::coolFunction("Hello World. From F1") ;<--This is just serving as an example of how you would assign functions to these keys
-; F2::coolFunction("Hello World. From F2")
-; F3::send a
-; F4::
-; F5::
+F1::send à
++F1::send À
+F2::send é
++F2::send É
+F3::send è
++F3::send È
+F4::send ê
++F4::send Ê
+F5::send ç	
++F5::send Ç
 ; F6::
-; F7::
-; F9::
+; F7::`
 ; F8::
-; F10::
+F9:: Controlsend, , {F22}, ahk_exe obs64.exe
+F10:: Controlsend, , {F23}, ahk_exe obs64.exe
 ; F11::
 ; F12::tooltip, you pressed the function key %A_thishotkey% on the [F24] keyboard
 ;;Note that the assignment on the above line will apply to ALL prior lines ending in "::"
@@ -104,14 +109,16 @@ F24::return ;this line is mandatory for proper functionality
 ; tab::
 q::reload
 ; w::
-; e::
+e::run, S:\etheremu\ETH-ethermine.bat
 ; r::
-t::run, C:\shortcuts\Windows Terminal
+t::run, wt
+
 ; y::
-; u::
+u:: send,ù
++u:: send Ù
 ; i::
-o::run, C:Program Files (x86)\Microsoft Office\root\Office16\OUTLOOK.EXE
-#o::run, C:Program Files (x86)\Microsoft Office\root\Office16\OUTLOOK.EXE /c ipm.note
+o:: send œ
++o:: send Œ
 
 p::send,{Media_Play_Pause}
 [::send,{Media_Prev}
@@ -121,7 +128,8 @@ p::send,{Media_Play_Pause}
 
 ;;------------------------NEXT ROW--------------------------;;
 
-a::Run, %A_WorkingDir%
+a::send,æ
++a::send,Æ
 s::Run C:\shortcuts\Spotify
 d::Run, C:\Users\%A_UserName%\Downloads
 f::Run,C:\Program Files (x86)\Mozilla Firefox\Firefox.exe
@@ -137,29 +145,20 @@ K::Run, calc
 
 ;;-----------Q-------------NEXT ROW--------------------------;;
 
-; z::
+z:: Run, %A_WorkingDir%
 ; x::
-c::run,C:Program Files (x86)\Microsoft Office\root\Office16\OUTLOOK.EXE /select outlook:calendar
-#c::
-run, C:Program Files (x86)\Microsoft Office\root\Office16\OUTLOOK.EXE /select outlook:calendar, , , PID
-WinWait, Calendar, , 6
-if ErrorLevel
-{
-    MsgBox, WinWait timed out.
-    return
-}
-sleep, 500 
-send, ^+q
-return
+c::run, wt -p "Claim Center"
++c::run, wt -p "Policy Center"
+^c::send gwb studio
 ; v::
 b::Run,C:\Program Files (x86)\Google\Chrome\Application\Chrome.exe
-; n::
-m::Send {LControl down}d{LControl up}
+n::send preciousprotection
+m::send {LControl down}d{LControl up}
 ; ,::
 ; .::
 ; /::tooltip, [F24]  %A_thishotKey%
 
-; space::
+; space:: send aspirine
 ; tooltip, [F24] SPACEBAR. This will now clear remaining tooltips.
 ; sleep 500
 ; tooltip,
@@ -217,7 +216,7 @@ m::Send {LControl down}d{LControl up}
 
 ; F20::tooltip, [F24] CapsLock -to-> SC06B-F20
 ;SC05C::tooltip, [F24] NumLock -to-> SC05C-International 6
-SC05C::Send, {NumLock}
+SC05C::send, {NumLock}
 ;Numlock is an AWFUL key. I prefer to leave it permanently on.
 ;It's been changed to International 6, so you can use it with no fear that it'll mess up your numpad.
 ;;ScrollLock is in the next section.
@@ -317,8 +316,8 @@ SC05C::Send, {NumLock}
 ;;;---------------IMPORTANT: HOW TO USE #IF THINGIES-------------------
 
 ;;You can use more than one #if thingy at a time, but it must be done like so:
-#if (getKeyState("F24", "P")) and if WinActive("ahk_exe Adobe Premiere Pro.exe")
-F1::msgbox, You pressed F1 on your secondary keyboard while inside of Premiere Pro
+; #if (getKeyState("F24", "P")) and if WinActive("ahk_exe Adobe Premiere Pro.exe")
+; F1::msgbox, You pressed F1 on your secondary keyboard while inside of Premiere Pro
 
 ;; HOWEVER, You still would still need to block F1 using #if (getKeyState("F24", "P"))
 ;; If you don't, it'll pass through normally, any time Premiere is NOT active.
